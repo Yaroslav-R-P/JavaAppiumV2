@@ -2,6 +2,7 @@ package lib.android;
 
 import io.appium.java_client.AppiumDriver;
 import lib.ui.ArticlePageObject;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class AndroidArticlePageObject extends ArticlePageObject {
 
@@ -15,7 +16,7 @@ public class AndroidArticlePageObject extends ArticlePageObject {
          ANDROID_TITLE_ELEMENT_FOR_TESTS = "xpath://android.widget.TextView[@text=\"Java (programming language)\"]";
      }
 
-     public AndroidArticlePageObject(AppiumDriver driver) {
+     public AndroidArticlePageObject(RemoteWebDriver driver) {
          super(driver);
      }
 

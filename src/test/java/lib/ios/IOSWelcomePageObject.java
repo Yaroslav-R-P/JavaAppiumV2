@@ -2,6 +2,7 @@ package lib.ios;
 
 import io.appium.java_client.AppiumDriver;
 import lib.ui.WelcomePageObject;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class IOSWelcomePageObject extends WelcomePageObject {
     static {
@@ -24,7 +25,7 @@ public class IOSWelcomePageObject extends WelcomePageObject {
         SCROLL_VIEW_CONTAINER_ANDROID = "id:org.wikipedia:id/scrollViewContainer";
     }
 
-    public IOSWelcomePageObject(AppiumDriver driver) {
+    public IOSWelcomePageObject(RemoteWebDriver driver) {
         super(driver);
     }
 }

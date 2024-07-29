@@ -1,6 +1,7 @@
 package tests;
 
 import lib.CoreTestCase;
+import lib.Platform;
 import lib.ui.WelcomePageObject;
 import lib.ui.SearchPageObject;
 import lib.ui.factories.SearchPageObjectFactory;
@@ -11,21 +12,23 @@ public class SearchTests extends CoreTestCase {
     //тесты на проверку работы поиска
     @Test
     public void testSearch() {
-
-        WelcomePageObject onboardingPageObject = WelcomePageObjectFactory.get(driver);
-        onboardingPageObject.skipOnboarding();
+        if(Platform.getInstance().isIOS() || Platform.getInstance().isAndroid()) {
+            WelcomePageObject onboardingPageObject = WelcomePageObjectFactory.get(driver);
+            onboardingPageObject.skipOnboarding();
+        }
 
         SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
         searchPageObject.initSearchInput();
         searchPageObject.typeSearchLine("Java");
         searchPageObject.waitForSearchResult("Object-oriented programming language");
-
     }
 
     @Test
     public void testCancelSearch() {
-        WelcomePageObject onboardingPageObject = WelcomePageObjectFactory.get(driver);
-        onboardingPageObject.skipOnboarding();
+        if(Platform.getInstance().isIOS() || Platform.getInstance().isAndroid()) {
+            WelcomePageObject onboardingPageObject = WelcomePageObjectFactory.get(driver);
+            onboardingPageObject.skipOnboarding();
+        }
 
         SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
         searchPageObject.initSearchInput();
@@ -37,8 +40,10 @@ public class SearchTests extends CoreTestCase {
 
     @Test
     public void testAmountOfNotEmptySearch() {
-        WelcomePageObject onboardingPageObject = WelcomePageObjectFactory.get(driver);
-        onboardingPageObject.skipOnboarding();
+        if(Platform.getInstance().isIOS() || Platform.getInstance().isAndroid()) {
+            WelcomePageObject onboardingPageObject = WelcomePageObjectFactory.get(driver);
+            onboardingPageObject.skipOnboarding();
+        }
 
         SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
         searchPageObject.initSearchInput();
@@ -54,8 +59,10 @@ public class SearchTests extends CoreTestCase {
 
     @Test
     public void testAmountOfEmptySearch() {
-        WelcomePageObject onboardingPageObject = WelcomePageObjectFactory.get(driver);
-        onboardingPageObject.skipOnboarding();
+        if(Platform.getInstance().isIOS() || Platform.getInstance().isAndroid()) {
+            WelcomePageObject onboardingPageObject = WelcomePageObjectFactory.get(driver);
+            onboardingPageObject.skipOnboarding();
+        }
 
         SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
         searchPageObject.initSearchInput();
@@ -69,8 +76,10 @@ public class SearchTests extends CoreTestCase {
     @Test
     public void testCancelSearchResult() {
 
-        WelcomePageObject onboardingPageObject = WelcomePageObjectFactory.get(driver);
-        onboardingPageObject.skipOnboarding();
+        if(Platform.getInstance().isIOS() || Platform.getInstance().isAndroid()) {
+            WelcomePageObject onboardingPageObject = WelcomePageObjectFactory.get(driver);
+            onboardingPageObject.skipOnboarding();
+        }
 
         SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
         searchPageObject.initSearchInput();

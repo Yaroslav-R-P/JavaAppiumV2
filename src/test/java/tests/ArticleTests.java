@@ -1,6 +1,7 @@
 package tests;
 
 import lib.CoreTestCase;
+import lib.Platform;
 import lib.ui.ArticlePageObject;
 import lib.ui.WelcomePageObject;
 import lib.ui.SearchPageObject;
@@ -13,8 +14,10 @@ public class ArticleTests extends CoreTestCase {
     //тесты на статьи
     @Test
     public void testCompereArticleTitle() {
-        WelcomePageObject onboardingPageObject = WelcomePageObjectFactory.get(driver);
-        onboardingPageObject.skipOnboarding();
+        if(Platform.getInstance().isIOS() || Platform.getInstance().isAndroid()) {
+            WelcomePageObject onboardingPageObject = WelcomePageObjectFactory.get(driver);
+            onboardingPageObject.skipOnboarding();
+        }
 
         SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
         searchPageObject.initSearchInput();
@@ -32,8 +35,10 @@ public class ArticleTests extends CoreTestCase {
     public void testTitlePresence() {
         String articleNameWithSubstring = "Java (programming language)";
 
-        WelcomePageObject onboardingPageObject = WelcomePageObjectFactory.get(driver);
-        onboardingPageObject.skipOnboarding();
+        if(Platform.getInstance().isIOS() || Platform.getInstance().isAndroid()) {
+            WelcomePageObject onboardingPageObject = WelcomePageObjectFactory.get(driver);
+            onboardingPageObject.skipOnboarding();
+        }
 
         SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
         searchPageObject.initSearchInput();

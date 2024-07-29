@@ -2,6 +2,7 @@ package lib.ios;
 
 import io.appium.java_client.AppiumDriver;
 import lib.ui.NavigationUiPageObject;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class IOSNavigationUi extends NavigationUiPageObject {
 
@@ -10,7 +11,7 @@ public class IOSNavigationUi extends NavigationUiPageObject {
     }
 
 
-    public IOSNavigationUi(AppiumDriver driver) {
+    public IOSNavigationUi(RemoteWebDriver driver) {
         super(driver);
     }
 }

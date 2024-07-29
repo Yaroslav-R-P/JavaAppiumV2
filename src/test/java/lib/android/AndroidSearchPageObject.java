@@ -2,6 +2,7 @@ package lib.android;
 
 import io.appium.java_client.AppiumDriver;
 import lib.ui.SearchPageObject;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class AndroidSearchPageObject extends SearchPageObject {
 
@@ -15,7 +16,7 @@ public class AndroidSearchPageObject extends SearchPageObject {
                 SEARCH_EMPTY_PAGE_LOGO = "id:org.wikipedia:id/search_empty_image";
     }
 
-    public AndroidSearchPageObject(AppiumDriver driver) {
+    public AndroidSearchPageObject(RemoteWebDriver driver) {
         super(driver);
     }
 
