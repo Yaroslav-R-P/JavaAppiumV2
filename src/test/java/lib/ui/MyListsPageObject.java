@@ -1,10 +1,12 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
+import lib.Platform;
 import org.openqa.selenium.By;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 abstract public class MyListsPageObject extends MainPageObject {
-    public MyListsPageObject(AppiumDriver driver) {
+    public MyListsPageObject(RemoteWebDriver driver) {
         super(driver);
     }
 
@@ -14,7 +16,8 @@ abstract public class MyListsPageObject extends MainPageObject {
 
     NOT_NOW_LINK,
     DELETE_ARTICLE,
-    JAVA_ARTICLE_TITLE;
+    JAVA_ARTICLE_TITLE,
+    REMOVE_FROM_SAVED_BUTTON;
 
 
     // данный метод написан для примера, не используется в новой версии вики
@@ -24,6 +27,10 @@ abstract public class MyListsPageObject extends MainPageObject {
 
     private static String getSavedArticleXpathByTitle(String article_title) {
         return ARTICLE_BY_TITLE_TPL.replace("{TITLE}", article_title);
+    }
+
+    private static String getRemoveButtonByTitle(String article_title) {
+        return REMOVE_FROM_SAVED_BUTTON.replace("{TITLE}", article_title);
     }
 
 // данный метод написан для примера, не используется в новой версии вики
@@ -36,12 +43,20 @@ abstract public class MyListsPageObject extends MainPageObject {
     public void swipeByArticleToDelete(String article_title) {
         this.waitForArticleToAppearByTitle(article_title);
         String article_xpath = getSavedArticleXpathByTitle(article_title);
-        this.swipeElementToLeft(
-                article_xpath,
-                600,
-                "Cannot to swipe"
-        );
-        this.waitForArticleToDisappearByTitle(article_title);
+
+        if(Platform.getInstance().isIOS() || Platform.getInstance().isAndroid()) {
+            this.swipeElementToLeft(
+                    article_xpath,
+                    600,
+                    "Cannot to swipe"
+            );
+            this.waitForArticleToDisappearByTitle(article_title);
+        } else {
+           String remove_locator = getRemoveButtonByTitle(article_title);
+            this.waitForElementAndClick(remove_locator, "Cannot find and click button to remuve article frome saved", 15);
+            driver.navigate().refresh();
+        }
+
     }
 
     public void waitForArticleToAppearByTitle(String article_title) {

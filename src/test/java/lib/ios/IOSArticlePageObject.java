@@ -2,6 +2,7 @@ package lib.ios;
 
 import io.appium.java_client.AppiumDriver;
 import lib.ui.ArticlePageObject;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class IOSArticlePageObject extends ArticlePageObject {
 
@@ -19,7 +20,7 @@ public class IOSArticlePageObject extends ArticlePageObject {
 //        MY_LIST_NAME_INPUT = "id:org.wikipedia:id/text_input";
     }
 
-    public IOSArticlePageObject(AppiumDriver driver) {
+    public IOSArticlePageObject(RemoteWebDriver driver) {
         super(driver);
     }
 }

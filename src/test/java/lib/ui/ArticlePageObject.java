@@ -3,13 +3,15 @@ package lib.ui;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebElement;
 import lib.Platform;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 abstract public class ArticlePageObject extends MainPageObject {
     protected static String
     TITLE_TPL,
     SAVE_BUTTON,
     OK_BUTTON_IN_THE_SAVE_WINDOW,
-
+    OPTIONS_REMOVE_FROM_MY_LIST_BUTTON,
+    OPTIONS_ADD_TO_MY_LIST_BUTTON,
     ADD_TO_LIST_BUTTON_IN_SNACKBAR,
     VIEW_LIST_BUTTON_IN_SNACKBAR,
     MY_LIST_NAME_INPUT,
@@ -18,7 +20,7 @@ abstract public class ArticlePageObject extends MainPageObject {
     GO_HOME_LINK;
 
 
-    public ArticlePageObject(AppiumDriver driver) {
+    public ArticlePageObject(RemoteWebDriver driver) {
         super(driver);
     }
 
@@ -38,10 +40,11 @@ abstract public class ArticlePageObject extends MainPageObject {
         WebElement element = waitForElementPresent(ANDROID_TITLE_ELEMENT_FOR_TESTS,"cannot find article title", 20);
         if(Platform.getInstance().isAndroid()) {
             return element.getText();
-        } else {
+        } else if(Platform.getInstance().isIOS()) {
             return element.getAttribute("name");
+        } else {
+            return element.getText();
         }
-
     }
 
     public void addArticleToMyListAndGoToIt(String name_of_folder) {
@@ -78,16 +81,23 @@ abstract public class ArticlePageObject extends MainPageObject {
     }
 
     public void addArticlesToMySave() {
-    waitForElementAndClick(SAVE_BUTTON,"Cannot find Save button", 5);
+    if(Platform.getInstance().isMw()) {
+        this.removeArticleFromSavedIfItAdded();
+        this.waitForElementAndClick(SAVE_BUTTON,"Cannot find Save button", 5);
+
+    } else {
+        waitForElementAndClick(SAVE_BUTTON,"Cannot find Save button", 5);}
     }
 
     public void goToTheHomeWikiPage() {
         waitForElementAndClick(GO_HOME_LINK, "Cannot find link 'go to the home page'", 5);
     }
 
-
-
-
-
+    public void removeArticleFromSavedIfItAdded() {
+        if(this.isElementPresent(OPTIONS_REMOVE_FROM_MY_LIST_BUTTON)) {
+            this.waitForElementAndClick(OPTIONS_REMOVE_FROM_MY_LIST_BUTTON, "Cannot find and click remove from my list button", 5);
+            this.waitForElementPresent(OPTIONS_ADD_TO_MY_LIST_BUTTON, "Cannot find ADD_TO_MY_LIST_BUTTON", 10);
+        }
+    }
 }
 

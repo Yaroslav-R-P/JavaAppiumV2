@@ -2,9 +2,10 @@ package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 abstract public class HomePageObject extends MainPageObject {
-    public HomePageObject(AppiumDriver driver) {
+    public HomePageObject(RemoteWebDriver driver) {
         super(driver);
     }
     protected static String
