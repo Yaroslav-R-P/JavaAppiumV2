@@ -1,8 +1,6 @@
 package lib.ui;
 
-import io.appium.java_client.AppiumDriver;
 import lib.Platform;
-import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 abstract public class MyListsPageObject extends MainPageObject {
@@ -15,9 +13,12 @@ abstract public class MyListsPageObject extends MainPageObject {
     ARTICLE_BY_TITLE_TPL,
 
     NOT_NOW_LINK,
+    BACK_LINK_TO_SAVED,
     DELETE_ARTICLE,
     JAVA_ARTICLE_TITLE,
-    REMOVE_FROM_SAVED_BUTTON;
+    REMOVE_FROM_SAVED_BUTTON,
+    SAVED_ARTICLES_LINK,
+    SAVED_ARTICLE_ELEMENT;
 
 
     // данный метод написан для примера, не используется в новой версии вики
@@ -79,6 +80,23 @@ abstract public class MyListsPageObject extends MainPageObject {
                 "Cannot to swipe"
         );
         this.waitForElementAndClick(DELETE_ARTICLE, "Cannot find Delete button", 10);
+    }
+
+    public void openSavedArticles() {
+        waitForElementAndClick(SAVED_ARTICLES_LINK, "Cannot find and click SAVED_ARTICLES_LINK", 10);
+    }
+
+    public void closeSavedArticles() {
+        waitForElementAndClick(BACK_LINK_TO_SAVED, "Cannot find and click BACK_LINK_TO_SAVED", 10);
+    }
+
+    public int getAmountOfSavedArticles() {
+        this.waitForElementPresent(
+                SAVED_ARTICLE_ELEMENT,
+                "Cannot find by the request",
+                20
+        );
+        return this.getAmountOfElements(SAVED_ARTICLE_ELEMENT);
     }
 
 

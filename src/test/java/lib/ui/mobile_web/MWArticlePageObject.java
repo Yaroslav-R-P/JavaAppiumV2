@@ -12,6 +12,7 @@ public class MWArticlePageObject extends ArticlePageObject {
         GO_HOME_LINK = "xpath:(//a[@href='/wiki/Main_Page'])[2]";
         OPTIONS_ADD_TO_MY_LIST_BUTTON = "xpath://a[@id='ca-watch']";
         OPTIONS_REMOVE_FROM_MY_LIST_BUTTON = "xpath://span[@class='minerva-icon minerva-icon--unStar-progressive']";
+        CLOSE_SEARCH = "xpath:(//span[@class='mf-icon mf-icon-close '])[2]";
     }
 
 
