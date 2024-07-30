@@ -11,7 +11,11 @@ public class MWMyListsPageObject extends MyListsPageObject {
         NOT_NOW_LINK = "xpath://XCUIElementTypeButton[@name='Close']";
         DELETE_ARTICLE = "id:swipe action delete";
         JAVA_ARTICLE_TITLE = "xpath://XCUIElementTypeStaticText[@name='Java (programming language)']";
+        SAVED_ARTICLE_ELEMENT = "xpath://li[@class='page-summary with-watchstar']";
+
+
     }
+
 
     public MWMyListsPageObject(RemoteWebDriver driver) {
         super(driver);

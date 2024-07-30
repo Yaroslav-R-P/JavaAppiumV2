@@ -12,7 +12,7 @@ public class MyListTests extends CoreTestCase {
 
     //тесты списков статей
     @Test
-    public void testSaveFirstArticleToMyList() throws InterruptedException {
+    public void testSaveFirstArticleToMyList() {
         if(Platform.getInstance().isIOS() || Platform.getInstance().isAndroid()) {
             WelcomePageObject onboardingPageObject = WelcomePageObjectFactory.get(driver);
             onboardingPageObject.skipOnboarding();
@@ -58,9 +58,94 @@ public class MyListTests extends CoreTestCase {
             navigation.goToLists();
 
             MyListsPageObject myListsPageObject = MyListsPageObjectFactory.get(driver);
-            Thread.sleep(10000);
             myListsPageObject.swipeByArticleToDelete(articleWithSubstring);
 
         }
+    }
+
+    @Test
+    public void testSaveAndDeleteFirstArticle() throws InterruptedException {
+        //проверяем, что работает Android или iOS, скипаем онбординг
+        if(Platform.getInstance().isIOS() || Platform.getInstance().isAndroid()) {
+            WelcomePageObject onboardingPageObject = WelcomePageObjectFactory.get(driver);
+            onboardingPageObject.skipOnboarding();
+        }
+        //общие шаги  и переменные  для Android, iOS, Mobile_Web
+        SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
+        searchPageObject.initSearchInput();
+        searchPageObject.typeSearchLine("Java");
+        String firstArticleWithSubstring = "Java (programming language)";
+        String secondArticleWithSubstring = "Island in Indonesia";
+        String secondArticleWithSubstringFromWeb = "Java";
+        int amount_saved_articles = 0;
+        searchPageObject.clickByArticleWithSubstring(firstArticleWithSubstring);
+
+        ArticlePageObject articlePageObject = ArticlePageObjectFactory.get(driver);;
+        articlePageObject.waitForTitleElement(firstArticleWithSubstring);
+        articlePageObject.addArticleToMyList();
+
+        //после добавления первой статьи в сохранённые, делим логику на разные платформы
+
+        //Для Android, iOS общий блок по добавлению доп. статьи и переход в сохранённые статьи
+        if(Platform.getInstance().isAndroid() || Platform.getInstance().isIOS()) {
+            articlePageObject.setCloseArticleButton();
+            searchPageObject.clickByArticleWithSubstring(secondArticleWithSubstring);
+            articlePageObject.waitForTitleElement(secondArticleWithSubstring);
+            articlePageObject.addArticleToMyList();
+            articlePageObject.setCloseArticleButton();
+            articlePageObject.cancelSearch();
+            NavigationUiPageObject navigationUiPageObject = NavigationUIFactory.get(driver);
+            navigationUiPageObject.openMyLists();
+        }
+        /*финальный шаг для каждой платформы раздельно ввиду особенностей работы приложений.
+            в финале для iOS or Android мы получаем значение amount_saved_articles, которое потом
+            ассертим с ожидаемым кол-вом статей.
+         */
+        if(Platform.getInstance().isIOS()) {
+            MyListsPageObject myListsPageObject = MyListsPageObjectFactory.get(driver);
+            myListsPageObject.closeSynchronizationWindow();
+            myListsPageObject.swipeAndTapDeleteArticle();
+            Thread.sleep(20000);
+            amount_saved_articles = myListsPageObject.getAmountOfSavedArticles();
+        }
+        if(Platform.getInstance().isAndroid()) {
+            MyListsPageObject myListsPageObject = MyListsPageObjectFactory.get(driver);
+            myListsPageObject.openSavedArticles();
+            Thread.sleep(20000);
+            myListsPageObject.swipeByArticleToDelete(firstArticleWithSubstring);
+            amount_saved_articles = myListsPageObject.getAmountOfSavedArticles();
+        }
+
+        /*
+        Шаги теста для MW, после нажатия сохранения первой статьи. Включают в себя расширенные действия
+        авторизации, навигации. Финалом является аналогичное мобилкам действие - получение amount_saved_articles
+         */
+        if(Platform.getInstance().isMw()) {
+            AuthorizationPageObject auth = new AuthorizationPageObject(driver);
+            auth.clickAuthButton();
+            auth.enterLoginData(login,password);
+            auth.submitForm();
+
+            articlePageObject.goToTheHomeWikiPage();
+            searchPageObject.initSearchInput();
+            searchPageObject.typeSearchLine("Java");
+            Thread.sleep(10000);
+            searchPageObject.clickByArticleWithSubstring(secondArticleWithSubstringFromWeb);
+            articlePageObject.waitForTitleElement(secondArticleWithSubstringFromWeb);
+            articlePageObject.addArticleToMyList();
+
+
+            NavigationUiPageObject navigation = NavigationUIFactory.get(driver);
+            navigation.openNavigation();
+            navigation.goToLists();
+
+            MyListsPageObject myListsPageObject = MyListsPageObjectFactory.get(driver);
+            myListsPageObject.swipeByArticleToDelete(firstArticleWithSubstring);
+            amount_saved_articles = myListsPageObject.getAmountOfSavedArticles();
+        }
+
+
+        assertEquals("Saved articles contain more than one result", 1, amount_saved_articles);
+        System.out.println("Saved articles found " +amount_saved_articles);
     }
 }

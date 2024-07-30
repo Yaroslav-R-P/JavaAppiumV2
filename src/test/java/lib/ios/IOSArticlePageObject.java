@@ -10,6 +10,7 @@ public class IOSArticlePageObject extends ArticlePageObject {
         TITLE_TPL = "xpath://XCUIElementTypeStaticText[@name='{TITLE_TEXT}']";
         SAVE_BUTTON = "id:Save for later";
         CLOSE_ARTICLE_BUTTON = "xpath://XCUIElementTypeButton[@name='Search']";
+        CLOSE_SEARCH = "xpath://XCUIElementTypeButton[@name='Cancel']";
         ANDROID_TITLE_ELEMENT_FOR_TESTS = "xpath://XCUIElementTypeStaticText[@name='Java (programming language)']";
         GO_HOME_LINK = "id:Wikipedia, return to Explore";
 

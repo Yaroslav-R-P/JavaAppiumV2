@@ -12,6 +12,7 @@ public class IOSMyListsPageObject extends MyListsPageObject {
         NOT_NOW_LINK = "xpath://XCUIElementTypeButton[@name='Close']";
         DELETE_ARTICLE = "id:swipe action delete";
         JAVA_ARTICLE_TITLE = "xpath://XCUIElementTypeStaticText[@name='Java (programming language)']";
+        SAVED_ARTICLE_ELEMENT = "xpath://XCUIElementTypeCell";
     }
 
     public IOSMyListsPageObject(RemoteWebDriver driver) {

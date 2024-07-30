@@ -13,7 +13,9 @@ public class AndroidArticlePageObject extends ArticlePageObject {
          ADD_TO_LIST_BUTTON_IN_SNACKBAR = "id:org.wikipedia:id/snackbar_action";
          VIEW_LIST_BUTTON_IN_SNACKBAR = "id:org.wikipedia:id/snackbar_action";
          MY_LIST_NAME_INPUT = "id:org.wikipedia:id/text_input";
-         ANDROID_TITLE_ELEMENT_FOR_TESTS = "xpath://android.widget.TextView[@text=\"Java (programming language)\"]";
+         ANDROID_TITLE_ELEMENT_FOR_TESTS = "xpath://android.widget.TextView[@text='Java (programming language)']";
+         CLOSE_ARTICLE_BUTTON = "xpath://android.widget.ImageButton[@content-desc='Navigate up']";
+         CLOSE_SEARCH = "xpath://android.widget.ImageButton[@content-desc='Navigate up']";
      }
 
      public AndroidArticlePageObject(RemoteWebDriver driver) {

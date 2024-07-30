@@ -12,7 +12,8 @@ abstract public class NavigationUiPageObject extends MainPageObject {
 
      public void openMyLists() {
          if(Platform.getInstance().isMw()) {
-             this.triClickElementWithFewAttempts(MY_LISTS_LINK,"Cannot find MY_LISTS_LINK element",10);
+             //this.triClickElementWithFewAttempts(MY_LISTS_LINK,"Cannot find MY_LISTS_LINK element",10);
+             this.goToLists();
          }
          this.waitForElementAndClick(MY_LISTS_LINK, "Cannot find MY_LISTS_LINK element", 5);
      }
@@ -26,6 +27,14 @@ abstract public class NavigationUiPageObject extends MainPageObject {
 
     public void goToLists(){
         driver.get("https://en.m.wikipedia.org/wiki/Special:EditWatchlist");
+    }
+
+    public void goBackFromWeb() {
+         if(Platform.getInstance().isMw()) {
+             driver.navigate().back();
+         } else {
+             System.out.println("Method goBackFromWeb do nothing for platform " + Platform.getInstance().getPlatformVar());
+         }
     }
 
     public NavigationUiPageObject(RemoteWebDriver driver) {

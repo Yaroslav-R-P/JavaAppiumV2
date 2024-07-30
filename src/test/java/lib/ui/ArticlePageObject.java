@@ -17,7 +17,8 @@ abstract public class ArticlePageObject extends MainPageObject {
     MY_LIST_NAME_INPUT,
     ANDROID_TITLE_ELEMENT_FOR_TESTS,
     CLOSE_ARTICLE_BUTTON,
-    GO_HOME_LINK;
+    GO_HOME_LINK,
+    CLOSE_SEARCH;
 
 
     public ArticlePageObject(RemoteWebDriver driver) {
@@ -26,6 +27,10 @@ abstract public class ArticlePageObject extends MainPageObject {
 
     private static String getTitleXpathByArticleName(String articleNameWithSubstring) {
         return TITLE_TPL.replace("{TITLE_TEXT}", articleNameWithSubstring);
+    }
+
+    public void cancelSearch() {
+        waitForElementAndClick(CLOSE_SEARCH, "Cannot find and click CLOSE_SEARCH button", 10);
     }
 
     public WebElement waitForTitleElement(String articleWithSubstring) {
@@ -75,6 +80,13 @@ abstract public class ArticlePageObject extends MainPageObject {
                 5);
     }
 
+    public void addArticleToMyList( ) {
+        this.waitForElementAndClick(
+                SAVE_BUTTON,
+                "Cannot find save page element",
+                5);
+    }
+
     public void assertTheArticleHasATitle(String articleNameWithSubstring) {
     String title_xpath = getTitleXpathByArticleName(articleNameWithSubstring);
         this.waitForElementPresent(title_xpath, "The article has no title", 10);
@@ -99,5 +111,11 @@ abstract public class ArticlePageObject extends MainPageObject {
             this.waitForElementPresent(OPTIONS_ADD_TO_MY_LIST_BUTTON, "Cannot find ADD_TO_MY_LIST_BUTTON", 10);
         }
     }
+
+    public void setCloseArticleButton() {
+        this.waitForElementAndClick(CLOSE_ARTICLE_BUTTON, "Cannot find close article button", 5);
+    }
+
+
 }
 
