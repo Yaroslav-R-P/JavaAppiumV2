@@ -4,6 +4,7 @@ import lib.CoreTestCase;
 import lib.Platform;
 import lib.ui.*;
 import lib.ui.factories.*;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class MyListTests extends CoreTestCase {
@@ -51,7 +52,7 @@ public class MyListTests extends CoreTestCase {
             auth.submitForm();
 
             articlePageObject.waitForTitleElement(article_title);
-            assertEquals("We are not on the same page after login",article_title, articlePageObject.getArticleTitle());
+            Assert.assertEquals("We are not on the same page after login",article_title, articlePageObject.getArticleTitle());
 
             NavigationUiPageObject navigation = NavigationUIFactory.get(driver);
             navigation.openNavigation();
@@ -145,7 +146,7 @@ public class MyListTests extends CoreTestCase {
         }
 
 
-        assertEquals("Saved articles contain more than one result", 1, amount_saved_articles);
+        Assert.assertEquals("Saved articles contain more than one result", 1, amount_saved_articles);
         System.out.println("Saved articles found " +amount_saved_articles);
     }
 }
