@@ -8,6 +8,7 @@ import lib.ui.SearchPageObject;
 import lib.ui.factories.ArticlePageObjectFactory;
 import lib.ui.factories.SearchPageObjectFactory;
 import lib.ui.factories.WelcomePageObjectFactory;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class ChangeAppConditionTests extends CoreTestCase {
@@ -33,14 +34,14 @@ public class ChangeAppConditionTests extends CoreTestCase {
 
         String title_after_rotation = articlePageObject.getArticleTitle();
 
-        assertTrue(
+        Assert.assertTrue(
                 "title before and after rotation not equals",
                 title_after_rotation.equals(title_before_rotation));
 
         this.rotateScreenPortrait();
         String title_after_second_rotation = articlePageObject.getArticleTitle();
 
-        assertTrue(
+        Assert.assertTrue(
                 "title before and after rotation not equals",
                 title_before_rotation.equals(title_after_second_rotation));
     }
