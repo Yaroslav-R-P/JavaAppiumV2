@@ -1,5 +1,6 @@
 package lib.ui;
 
+import io.qameta.allure.Epic;
 import lib.Platform;
 import org.openqa.selenium.remote.RemoteWebDriver;
 

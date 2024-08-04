@@ -1,5 +1,7 @@
 package tests;
 
+import io.qameta.allure.*;
+import io.qameta.allure.junit4.DisplayName;
 import lib.CoreTestCase;
 import lib.Platform;
 import lib.ui.*;
@@ -7,12 +9,18 @@ import lib.ui.factories.*;
 import org.junit.Assert;
 import org.junit.Test;
 
+@Epic("Tests of saved articles")
 public class MyListTests extends CoreTestCase {
     private static final String login = "Testovtest3344";
     private static final String password = "gjhhgkj!@hg83HH";
 
     //тесты списков статей
     @Test
+    @Features(value = {@Feature(value="Search"),@Feature(value = "Article"),@Feature(value = "WelcomePage"),@Feature(value = "MyLists"), @Feature(value = "Authorization")})
+    @DisplayName("Save the first article to your reading list")
+    @Description("The test finds and adds an article to the reading list, then goes to the list and deletes it")
+    @Step("Starting test testSaveFirstArticleToMyList")
+    @Severity(value = SeverityLevel.CRITICAL)
     public void testSaveFirstArticleToMyList() {
         if(Platform.getInstance().isIOS() || Platform.getInstance().isAndroid()) {
             WelcomePageObject onboardingPageObject = WelcomePageObjectFactory.get(driver);
@@ -65,6 +73,11 @@ public class MyListTests extends CoreTestCase {
     }
 
     @Test
+    @Features(value = {@Feature(value="Search"),@Feature(value = "Article"),@Feature(value = "WelcomePage"),@Feature(value = "MyLists"), @Feature(value = "Authorization")})
+    @DisplayName("Saving or deleting an article to your reading list")
+    @Description("The test finds and adds two articles to the reading list, removing the first one from the reading list")
+    @Step("Starting test testSaveAndDeleteFirstArticle")
+    @Severity(value = SeverityLevel.CRITICAL)
     public void testSaveAndDeleteFirstArticle() throws InterruptedException {
         //проверяем, что работает Android или iOS, скипаем онбординг
         if(Platform.getInstance().isIOS() || Platform.getInstance().isAndroid()) {

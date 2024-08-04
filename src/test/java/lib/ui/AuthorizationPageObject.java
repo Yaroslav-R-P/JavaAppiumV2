@@ -1,5 +1,6 @@
 package lib.ui;
 
+import io.qameta.allure.Epic;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class AuthorizationPageObject extends MainPageObject {

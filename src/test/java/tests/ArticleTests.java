@@ -17,7 +17,7 @@ import org.junit.Test;
 public class ArticleTests extends CoreTestCase {
     //тесты на статьи
     @Test
-    @Features(value = {@Feature(value="Search"),@Feature(value = "Article")}) // отмечаем, какие фичи затронуты тестом
+    @Features(value = {@Feature(value="Search"),@Feature(value = "Article"),@Feature(value = "WelcomePage")}) // отмечаем, какие фичи затронуты тестом
     @DisplayName("Compere article title with expected one") // отображаемое имя кейса в отчёте аллюра раздела Suites
     @Description("The test checks the presence and correct title text inside the opened article in web view") //описание того, как работает наш тест
     @Step("Starting test testCompereArticleTitle") //разметка шагов, описание последовательности действий
@@ -41,6 +41,11 @@ public class ArticleTests extends CoreTestCase {
     }
     //EX6
     @Test
+    @Features(value = {@Feature(value="Search"),@Feature(value = "Article"),@Feature(value = "WelcomePage")})
+    @DisplayName("Checking the display of the article title")
+    @Description("The test fails at the desired article and compares the expected title with the received one")
+    @Step("Starting test testTitlePresence")
+    @Severity(value = SeverityLevel.NORMAL)
     public void testTitlePresence() {
         String articleNameWithSubstring = "Java (programming language)";
 
