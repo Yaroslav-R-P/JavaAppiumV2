@@ -2,14 +2,12 @@ package lib;
 
 import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
-import junit.framework.TestCase;
 import lib.ui.WelcomePageObject;
 import lib.ui.factories.WelcomePageObjectFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.remote.RemoteWebDriver;
-
 import java.io.FileOutputStream;
 import java.time.Duration;
 import java.util.Properties;

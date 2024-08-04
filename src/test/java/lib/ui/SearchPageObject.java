@@ -1,10 +1,8 @@
 package lib.ui;
 
-import io.appium.java_client.AppiumDriver;
+import io.qameta.allure.Epic;
 import io.qameta.allure.Step;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 public abstract class SearchPageObject extends MainPageObject {
